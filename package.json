@@ -4,12 +4,16 @@
   "description": "Automatically captures every AI prompt you send in Trae and saves them to your project for Git history.",
   "version": "1.0.0",
   "publisher": "prompt-tracer",
+  "repository": {
+    "type": "git",
+    "url": "file:///Users/air/taskeasy/prompt-tracer"
+  },
   "engines": {
     "vscode": "^1.85.0"
   },
   "categories": ["Other"],
   "keywords": ["trae", "ai", "prompt", "capture", "history", "git"],
-  "activationEvents": ["*"],
+  "activationEvents": ["onStartupFinished"],
   "main": "./out/extension.js",
   "contributes": {
     "configuration": {
