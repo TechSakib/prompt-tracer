@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Build output
+out/
+dist/
+*.tsbuildinfo
+
+# Packaged extension artifacts
+*.vsix
+
+# Runtime / debug logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local test output from this extension
+ai-prompts/
+
+# macOS
+.DS_Store
+
+# Editor / workspace-local
+.vscode-test/

@@ -1,0 +1,87 @@
+{
+  "name": "prompt-tracer",
+  "displayName": "Prompt Tracer for Trae AI",
+  "description": "Automatically captures every AI prompt you send in Trae and saves them to your project for Git history.",
+  "version": "1.0.0",
+  "publisher": "prompt-tracer",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "keywords": ["trae", "ai", "prompt", "capture", "history", "git"],
+  "activationEvents": ["*"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Prompt Tracer",
+      "properties": {
+        "promptTracer.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable automatic prompt capture."
+        },
+        "promptTracer.outputFolder": {
+          "type": "string",
+          "default": "ai-prompts",
+          "description": "Folder name inside your project where prompts are saved."
+        },
+        "promptTracer.captureResponse": {
+          "type": "boolean",
+          "default": true,
+          "description": "Attempt to capture AI responses in addition to prompts."
+        },
+        "promptTracer.jsonEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Save prompts as structured JSON (prompts.json)."
+        },
+        "promptTracer.markdownEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Save prompts as human-readable Markdown (prompts.md)."
+        },
+        "promptTracer.debounceMs": {
+          "type": "number",
+          "default": 300,
+          "description": "Debounce delay in ms before writing to disk (avoid thrash)."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "promptTracer.toggle",
+        "title": "Prompt Tracer: Toggle On/Off"
+      },
+      {
+        "command": "promptTracer.openLog",
+        "title": "Prompt Tracer: Open Prompt Log"
+      },
+      {
+        "command": "promptTracer.clearLog",
+        "title": "Prompt Tracer: Clear Prompt Log"
+      },
+      {
+        "command": "promptTracer.showStats",
+        "title": "Prompt Tracer: Show Statistics"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        { "command": "promptTracer.toggle" },
+        { "command": "promptTracer.openLog" },
+        { "command": "promptTracer.clearLog" },
+        { "command": "promptTracer.showStats" }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "version": "1.0",
+  "project": "my-react-app",
+  "createdAt": "2025-04-26T08:12:03.441Z",
+  "updatedAt": "2025-04-26T14:47:22.119Z",
+  "sessionCount": 2,
+  "totalPrompts": 5,
+  "prompts": [
+    {
+      "id": "a1b2c3d4e5f6a7b8",
+      "prompt": "Create a custom React hook called useLocalStorage that syncs state with localStorage, handles SSR safely, and supports JSON serialization.",
+      "timestamp": "2025-04-26T08:12:03.441Z",
+      "projectRoot": "/Users/dev/projects/my-react-app",
+      "activeFile": "src/hooks/index.ts",
+      "activeLanguage": "typescript",
+      "response": "Here's a production-ready useLocalStorage hook:\n\n```typescript\nimport { useState, useEffect } from 'react';\n\nfunction useLocalStorage<T>(key: string, initialValue: T) {\n  const [storedValue, setStoredValue] = useState<T>(() => {\n    if (typeof window === 'undefined') return initialValue;\n    try {\n      const item = window.localStorage.getItem(key);\n      return item ? JSON.parse(item) : initialValue;\n    } catch { return initialValue; }\n  });\n\n  const setValue = (value: T | ((val: T) => T)) => {\n    try {\n      const valueToStore = value instanceof Function ? value(storedValue) : value;\n      setStoredValue(valueToStore);\n      if (typeof window !== 'undefined') {\n        window.localStorage.setItem(key, JSON.stringify(valueToStore));\n      }\n    } catch (error) { console.error(error); }\n  };\n\n  return [storedValue, setValue] as const;\n}\n\nexport default useLocalStorage;\n```",
+      "captureMethod": "command-intercept",
+      "sessionId": "sess_1745654323441_a1b2c3d4"
+    },
+    {
+      "id": "b2c3d4e5f6a7b8c9",
+      "prompt": "Add error boundary support to the hook so it doesn't break the app if localStorage is full or unavailable.",
+      "timestamp": "2025-04-26T08:24:11.008Z",
+      "projectRoot": "/Users/dev/projects/my-react-app",
+      "activeFile": "src/hooks/useLocalStorage.ts",
+      "activeLanguage": "typescript",
+      "response": null,
+      "captureMethod": "command-intercept",
+      "sessionId": "sess_1745654323441_a1b2c3d4"
+    },
+    {
+      "id": "c3d4e5f6a7b8c9d0",
+      "prompt": "Write unit tests for useLocalStorage using React Testing Library and jest. Cover: initial value, update, SSR environment, corrupted JSON, and quota exceeded error.",
+      "timestamp": "2025-04-26T09:05:47.334Z",
+      "projectRoot": "/Users/dev/projects/my-react-app",
+      "activeFile": "src/hooks/__tests__/useLocalStorage.test.ts",
+      "activeLanguage": "typescript",
+      "response": null,
+      "captureMethod": "network-proxy",
+      "sessionId": "sess_1745654323441_a1b2c3d4"
+    },
+    {
+      "id": "d4e5f6a7b8c9d0e1",
+      "prompt": "Refactor the UserProfile component to use the new useLocalStorage hook instead of the current useState + useEffect pattern.",
+      "timestamp": "2025-04-26T13:30:02.887Z",
+      "projectRoot": "/Users/dev/projects/my-react-app",
+      "activeFile": "src/components/UserProfile.tsx",
+      "activeLanguage": "typescriptreact",
+      "response": null,
+      "captureMethod": "command-intercept",
+      "sessionId": "sess_1745669402887_f6a7b8c9"
+    },
+    {
+      "id": "e5f6a7b8c9d0e1f2",
+      "prompt": "Why is my UserProfile re-rendering 4 times on mount? The component uses useLocalStorage for theme preference. Check for infinite loop causes.",
+      "timestamp": "2025-04-26T14:47:22.119Z",
+      "projectRoot": "/Users/dev/projects/my-react-app",
+      "activeFile": "src/components/UserProfile.tsx",
+      "activeLanguage": "typescriptreact",
+      "response": null,
+      "captureMethod": "command-intercept",
+      "sessionId": "sess_1745669402887_f6a7b8c9"
+    }
+  ]
+}
